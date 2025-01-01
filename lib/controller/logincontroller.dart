@@ -1,9 +1,10 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 
+import 'package:bookstore/views/mainscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:bookstore/views/auth/homescreen.dart';
+// import 'package:bookstore/views/homescreen.dart';
 
 class LoginController extends GetxController {
   final emailController = TextEditingController();
@@ -26,7 +27,7 @@ class LoginController extends GetxController {
               password: passController.text.trim())
           .then((value) {
         // Get.snackbar("Success", "Login Successfully");
-        Get.to(HomeScreen());
+        Get.to(MainScreen());
       });
     } catch (e) {
       print(e.toString());
