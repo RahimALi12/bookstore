@@ -1,8 +1,9 @@
-import 'package:bookstore/controller/signupcontroller.dart';
+import 'package:bookstore/controller/googleauthcontroller.dart';
+import 'package:bookstore/views/auth/resetpassword.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bookstore/controller/logincontroller.dart'; // Assuming you have a LoginController
-import 'package:bookstore/views/auth/signupscreen.dart';
+import 'package:bookstore/views/auth/emaillogin.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
@@ -12,7 +13,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final con = Get.put(LoginController());
-    final conn = Get.put(SignUpController());
+    final gac = Get.put(GoogleAuthcontroller());
 
     return SafeArea(
       child: Scaffold(
@@ -29,7 +30,7 @@ class LoginScreen extends StatelessWidget {
                       child: Container(
                         width: double.infinity,
                         height: 250,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
                               Color.fromARGB(255, 26, 118, 193),
@@ -84,13 +85,17 @@ class LoginScreen extends StatelessWidget {
                       buildPasswordField(con),
                       const SizedBox(height: 30),
 
+                      // Forgot Password Button
+                      buildForgotPasswordButton(context),
+                      const SizedBox(height: 20),
+
                       // Login Button
                       buildLoginButton(con, context),
 
                       const SizedBox(height: 20),
 
                       // "Connect with Us" Text and Google Button
-                      buildGoogleSignUp(conn),
+                      buildGoogleSignUp(gac),
 
                       const SizedBox(height: 20),
 
@@ -159,6 +164,29 @@ class LoginScreen extends StatelessWidget {
     });
   }
 
+// Forgot Password Button
+  Widget buildForgotPasswordButton(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        // Navigate to ResetPassword screen
+        Get.to(() => ResetPassword(), // Replace with your reset password screen
+            transition: Transition.fadeIn,
+            duration: const Duration(milliseconds: 600));
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: Text(
+          "Forgot Password?",
+          style: GoogleFonts.roboto(
+            color: const Color.fromARGB(255, 26, 118, 193),
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
   // Login Button
   Widget buildLoginButton(LoginController con, BuildContext context) {
     return InkWell(
@@ -183,7 +211,7 @@ class LoginScreen extends StatelessWidget {
             BoxShadow(
               color: Colors.black.withOpacity(0.5),
               blurRadius: 5,
-              offset: Offset(0, 0),
+              offset: const Offset(0, 0),
             ),
           ],
         ),
@@ -199,7 +227,7 @@ class LoginScreen extends StatelessWidget {
   }
 
 // Google Sign Up Button
-  Widget buildGoogleSignUp(SignUpController conn) {
+  Widget buildGoogleSignUp(GoogleAuthcontroller gac) {
     return Column(
       children: [
         // "Connect with Us" Text
@@ -221,7 +249,7 @@ class LoginScreen extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 8),
               child: GestureDetector(
                 onTap: () {
-                  conn.googleSignUp();
+                  gac.googleSignUp();
                 },
                 child: Container(
                   width: 50,
@@ -255,7 +283,7 @@ Widget buildSignUpButton(BuildContext context) {
     children: [
       GestureDetector(
         onTap: () {
-          Get.to(() => const SignUpScreen(),
+          Get.to(() => const Emaillogin(),
               transition: Transition.fadeIn,
               duration: const Duration(milliseconds: 900));
         },
@@ -271,12 +299,12 @@ Widget buildSignUpButton(BuildContext context) {
               BoxShadow(
                   color: Colors.black.withOpacity(0.5),
                   blurRadius: 5,
-                  offset: Offset(0, 0)),
+                  offset: const Offset(0, 0)),
             ],
           ),
           child: Center(
             child: Text(
-              "Go to Sign Up",
+              "Continue with Email",
               style: GoogleFonts.openSans(
                   color: const Color.fromARGB(255, 107, 107, 107),
                   fontSize: 16,

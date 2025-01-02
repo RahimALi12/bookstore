@@ -21,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
     String email = '';
 
     if (user != null) {
-      username = user.displayName ?? 'Unknown User';
+      username = user.displayName ?? 'Guest';
       email = user.email ?? 'No email provided';
     }
 

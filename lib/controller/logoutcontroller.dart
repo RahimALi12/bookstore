@@ -12,7 +12,7 @@ class LogoutContoller extends GetxController {
   void myLogout() {
     try {
       auth.signOut().then((value) {
-        Get.snackbar("Logout", "You Logged Out");
+        // Get.snackbar("Logout", "You Logged Out");
         Get.offAll(() => MainScreen());
       });
     } catch (e) {

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:bookstore/controller/signupcontroller.dart';
+import 'package:bookstore/controller/emaillogincontroller.dart';
 import 'package:bookstore/views/auth/loginscreen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+class Emaillogin extends StatelessWidget {
+  const Emaillogin({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final con = Get.put(SignUpController());
+    final con = Get.put(EmailLoginController());
 
     return SafeArea(
       child: Scaffold(
@@ -27,7 +27,7 @@ class SignUpScreen extends StatelessWidget {
                       child: Container(
                         width: double.infinity,
                         height: 250,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
                               Color.fromARGB(255, 26, 118, 193),
@@ -78,9 +78,7 @@ class SignUpScreen extends StatelessWidget {
                       const SizedBox(height: 20),
                       buildTextField(
                           con.userController, 'Username', Icons.person),
-                      const SizedBox(height: 20),
-                      buildTextField(
-                          con.contactController, 'Contact', Icons.phone),
+
                       const SizedBox(height: 20),
                       buildPasswordField(con),
                       const SizedBox(height: 20),
@@ -93,7 +91,7 @@ class SignUpScreen extends StatelessWidget {
                       const SizedBox(height: 20),
 
                       // Connect With Us Section
-                      buildGoogleSignUp(con),
+                      // buildGoogleSignUp(con),
 
                       const SizedBox(height: 20),
 
@@ -133,7 +131,7 @@ class SignUpScreen extends StatelessWidget {
   }
 
   // Password Field with Toggle
-  Widget buildPasswordField(SignUpController con) {
+  Widget buildPasswordField(EmailLoginController con) {
     return Obx(() {
       return TextField(
         controller: con.passController,
@@ -163,7 +161,7 @@ class SignUpScreen extends StatelessWidget {
   }
 
   // Confirm Password Field with Toggle
-  Widget buildConfirmPasswordField(SignUpController con) {
+  Widget buildConfirmPasswordField(EmailLoginController con) {
     return Obx(() {
       return TextField(
         controller: con.confirmPassController,
@@ -195,11 +193,11 @@ class SignUpScreen extends StatelessWidget {
   }
 
   // Sign Up Button
-  Widget buildSignUpButton(SignUpController con, BuildContext context) {
+  Widget buildSignUpButton(EmailLoginController con, BuildContext context) {
     return InkWell(
       onTap: () {
         if (con.ConfirmPass()) {
-          con.signup();
+          con.signUpWithEmail();
         } else {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text("Password doesn't match"),
@@ -224,13 +222,13 @@ class SignUpScreen extends StatelessWidget {
             BoxShadow(
               color: Colors.black.withOpacity(0.5),
               blurRadius: 5,
-              offset: Offset(0, 0),
+              offset: const Offset(0, 0),
             ),
           ],
         ),
         child: Center(
           child: Text(
-            "Sign Up",
+            "Continue",
             style: GoogleFonts.openSans(
                 color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
           ),
@@ -240,54 +238,54 @@ class SignUpScreen extends StatelessWidget {
   }
 
 // Google Sign Up Button
-  Widget buildGoogleSignUp(SignUpController con) {
-    return Column(
-      children: [
-        // "Connect with Us" Text
-        Text(
-          "Or connect with Us",
-          style: GoogleFonts.roboto(
-            color: const Color.fromARGB(255, 84, 83, 83),
-            fontSize: 15,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        const SizedBox(height: 10), // Add some space between text and button
+  // Widget buildGoogleSignUp(EmailLoginController con) {
+  //   return Column(
+  //     children: [
+  //       // "Connect with Us" Text
+  //       Text(
+  //         "Or connect with Us",
+  //         style: GoogleFonts.roboto(
+  //           color: const Color.fromARGB(255, 84, 83, 83),
+  //           fontSize: 15,
+  //           fontWeight: FontWeight.w500,
+  //         ),
+  //       ),
+  //       const SizedBox(height: 10), // Add some space between text and button
 
-        // Google Sign Up Button
-        Row(
-          children: [
-            Expanded(child: Divider(color: Colors.grey[400], thickness: 1.5)),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 8),
-              child: GestureDetector(
-                onTap: () {
-                  // Call the googleSignUp method from your controller
-                  con.googleSignUp();
-                },
-                child: Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(7),
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 175, 175, 175),
-                        width: 1.5),
-                    color: Colors.white,
-                  ),
-                  child: Center(
-                    child: Image.asset('assets/icons/google-icon.png',
-                        height: 24, width: 24),
-                  ),
-                ),
-              ),
-            ),
-            Expanded(child: Divider(color: Colors.grey[400], thickness: 1.5)),
-          ],
-        ),
-      ],
-    );
-  }
+  //       // Google Sign Up Button
+  //       Row(
+  //         children: [
+  //           Expanded(child: Divider(color: Colors.grey[400], thickness: 1.5)),
+  //           Container(
+  //             margin: const EdgeInsets.symmetric(horizontal: 8),
+  //             child: GestureDetector(
+  //               onTap: () {
+  //                 // Call the googleSignUp method from your controller
+  //                 con.googleSignUp();
+  //               },
+  //               child: Container(
+  //                 width: 50,
+  //                 height: 50,
+  //                 decoration: BoxDecoration(
+  //                   borderRadius: BorderRadius.circular(7),
+  //                   border: Border.all(
+  //                       color: const Color.fromARGB(255, 175, 175, 175),
+  //                       width: 1.5),
+  //                   color: Colors.white,
+  //                 ),
+  //                 child: Center(
+  //                   child: Image.asset('assets/icons/google-icon.png',
+  //                       height: 24, width: 24),
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //           Expanded(child: Divider(color: Colors.grey[400], thickness: 1.5)),
+  //         ],
+  //       ),
+  //     ],
+  //   );
+  // }
 
   // Login Button
   Widget buildLoginButton(BuildContext context) {
@@ -312,7 +310,7 @@ class SignUpScreen extends StatelessWidget {
                 BoxShadow(
                     color: Colors.black.withOpacity(0.5),
                     blurRadius: 5,
-                    offset: Offset(0, 0)),
+                    offset: const Offset(0, 0)),
               ],
             ),
             child: Center(
