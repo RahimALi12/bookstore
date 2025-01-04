@@ -31,7 +31,7 @@ class ResetPassword extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: "Enter your email",
                 filled: true,
-                fillColor: const Color.fromARGB(255, 52, 52, 52),
+                fillColor: Color.fromARGB(255, 214, 214, 214),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide.none,
@@ -60,7 +60,7 @@ class ResetPassword extends StatelessWidget {
                 }
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 26, 118, 193),
+                backgroundColor: Color.fromARGB(255, 199, 230, 255),
               ),
               child: const Text("Send Reset Link"),
             ),

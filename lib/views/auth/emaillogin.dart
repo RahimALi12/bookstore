@@ -296,7 +296,7 @@ class Emaillogin extends StatelessWidget {
           onTap: () {
             Get.to(() => const LoginScreen(),
                 transition: Transition.fadeIn,
-                duration: const Duration(milliseconds: 900));
+                duration: const Duration(milliseconds: 300));
           },
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 900),
@@ -304,12 +304,12 @@ class Emaillogin extends StatelessWidget {
             width: 150,
             height: 40,
             decoration: BoxDecoration(
-              color: Colors.grey[200],
+              color: Colors.white,
               borderRadius: BorderRadius.circular(30),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.black.withOpacity(0.5),
-                    blurRadius: 5,
+                    color: Colors.black.withAlpha(70),
+                    blurRadius: 3.5,
                     offset: const Offset(0, 0)),
               ],
             ),

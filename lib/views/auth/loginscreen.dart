@@ -100,7 +100,7 @@ class LoginScreen extends StatelessWidget {
                       const SizedBox(height: 20),
 
                       // Sign Up Button
-                      buildSignUpButton(context),
+                      // buildSignUpButton(context),
                     ],
                   ),
                 ),
@@ -231,6 +231,7 @@ class LoginScreen extends StatelessWidget {
     return Column(
       children: [
         // "Connect with Us" Text
+        SizedBox(height: 10),
         Text(
           "Or connect with Us",
           style: GoogleFonts.roboto(
@@ -239,7 +240,7 @@ class LoginScreen extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        const SizedBox(height: 10), // Add some space between text and button
+        const SizedBox(height: 20), // Add some space between text and button
 
         // Google Sign Up Button
         Row(
@@ -268,6 +269,39 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(
+              width: 12,
+              child: Divider(color: Colors.grey[400], thickness: 1.5),
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 8),
+              child: GestureDetector(
+                onTap: () {
+                  Get.to(() => const Emaillogin(),
+                      transition: Transition.fadeIn,
+                      duration: const Duration(milliseconds: 900));
+                },
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 900),
+                  curve: Curves.easeInCubic,
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(7),
+                      border: Border.all(
+                          color: const Color.fromARGB(255, 175, 175, 175),
+                          width: 1.5),
+                      color: Colors.white,
+                    ),
+                    child: Center(
+                      child: Image.asset('assets/icons/email.png',
+                          height: 24, width: 24),
+                    ),
+                  ),
+                ),
+              ),
+            ),
             Expanded(child: Divider(color: Colors.grey[400], thickness: 1.5)),
           ],
         ),
@@ -285,30 +319,23 @@ Widget buildSignUpButton(BuildContext context) {
         onTap: () {
           Get.to(() => const Emaillogin(),
               transition: Transition.fadeIn,
-              duration: const Duration(milliseconds: 900));
+              duration: const Duration(milliseconds: 300));
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 900),
           curve: Curves.easeInCubic,
-          width: 150,
-          height: 40,
-          decoration: BoxDecoration(
-            color: Colors.grey[200],
-            borderRadius: BorderRadius.circular(30),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.black.withOpacity(0.5),
-                  blurRadius: 5,
-                  offset: const Offset(0, 0)),
-            ],
-          ),
-          child: Center(
-            child: Text(
-              "Continue with Email",
-              style: GoogleFonts.openSans(
-                  color: const Color.fromARGB(255, 107, 107, 107),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold),
+          child: Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(7),
+              border: Border.all(
+                  color: const Color.fromARGB(255, 175, 175, 175), width: 1.5),
+              color: Colors.white,
+            ),
+            child: Center(
+              child:
+                  Image.asset('assets/icons/email.png', height: 24, width: 24),
             ),
           ),
         ),

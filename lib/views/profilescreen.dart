@@ -29,7 +29,7 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'BookStore',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         centerTitle: true,
         backgroundColor: Colors.blue,
@@ -158,7 +158,10 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 child: Text(
                   'Login',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
               ),
             ),
