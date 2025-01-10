@@ -21,8 +21,9 @@ android {
 
     defaultConfig {
         applicationId = "com.example.bookstore"
-        minSdk = 21 // Minimum SDK
-        targetSdk = 34 // Latest target SDK
+        minSdk = 23
+        minSdkVersion 23
+        targetSdk = flutter.targetSdkVersion
         versionCode = 1
         versionName = "1.0"
     }
