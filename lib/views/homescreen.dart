@@ -1,6 +1,7 @@
 import 'package:bookstore/controller/homecontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,22 +14,15 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           "Book Store",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 255, 255, 255)),
         ),
-        centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
         flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.blue.shade300,
-                const Color.fromARGB(255, 39, 121, 176),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
+          color: const Color.fromARGB(255, 32, 96, 214),
         ),
       ),
       body: Obx(() {
@@ -42,6 +36,7 @@ class HomeScreen extends StatelessWidget {
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
             // Search Bar with Filter Button
             Padding(
@@ -70,7 +65,7 @@ class HomeScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
                       padding: const EdgeInsets.all(12),
-                      backgroundColor: Colors.blue.shade300,
+                      backgroundColor: const Color.fromARGB(255, 32, 96, 214),
                     ),
                     child: const Icon(Icons.filter_list, color: Colors.white),
                   ),
@@ -79,38 +74,45 @@ class HomeScreen extends StatelessWidget {
             ),
 
             // Categories Horizontal Scroll
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 10),
-              height: 50,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: categoryController.categoryData.length,
-                itemBuilder: (context, index) {
-                  var category = categoryController.categoryData[index];
-                  return GestureDetector(
-                    onTap: () {
-                      categoryController.fetchProductsForCategory(category[
-                          'id']); // Load products for selected category
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 10),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 10),
-                      decoration: BoxDecoration(
-                        color: Colors.blue.shade100,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Center(
-                        child: Text(
-                          category['name'] ?? 'Category',
-                          style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
+            Obx(() {
+              return Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                height: 35,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: categoryController.categoryData.length,
+                  itemBuilder: (context, index) {
+                    var category = categoryController.categoryData[index];
+                    return GestureDetector(
+                      onTap: () {
+                        categoryController.fetchCategories();
+                      },
+                      child: Container(
+                        width: 100,
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 10),
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 5, 114, 216),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Center(
+                          child: Text(
+                            category['name'] ?? 'Category',
+                            style: GoogleFonts.plusJakartaSans(
+                              fontSize: 12,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
-              ),
+                    );
+                  },
+                ),
+              );
+            }),
+            const SizedBox(
+              height: 10,
             ),
 
             // Horizontal Products Scroll
@@ -152,43 +154,25 @@ class HomeScreen extends StatelessWidget {
       width: 200,
       margin: const EdgeInsets.only(right: 16),
       child: Card(
-        elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            // Product Image
-            Expanded(
-              child: Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(12),
-                      topRight: Radius.circular(12),
-                    ),
-                    child: Image.network(
-                      product['imagename'] ?? '',
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      errorBuilder: (context, error, stackTrace) => const Icon(
-                        Icons.image_not_supported,
-                        size: 50,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 8,
-                    right: 8,
-                    child: IconButton(
-                      onPressed: () {
-                        // Add to wishlist action
-                      },
-                      icon:
-                          const Icon(Icons.favorite_border, color: Colors.red),
-                    ),
-                  ),
-                ],
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(12),
+                topRight: Radius.circular(12),
+              ),
+              child: Image.network(
+                product['imagename'] ?? '',
+                fit: BoxFit.cover,
+                width: double.infinity,
+                errorBuilder: (context, error, stackTrace) => const Icon(
+                  Icons.image_not_supported,
+                  size: 50,
+                  color: Colors.grey,
+                ),
               ),
             ),
             Padding(
@@ -213,14 +197,28 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Navigate to product details or add to cart
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                    ),
-                    child: const Text("View Details"),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          // Navigate to product details or add to cart
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.all(8),
+                        ),
+                        child: const Text("View Details"),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          // Add to wishlist action
+                        },
+                        icon: const Icon(
+                          Icons.favorite_border,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

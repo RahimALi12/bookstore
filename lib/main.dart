@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
         Get.offAll(() => const LoginScreen());
       }
     }
+    
   }
 
   @override
@@ -94,3 +95,4 @@ class AuthenticationHandler extends StatelessWidget {
     );
   }
 }
+  
